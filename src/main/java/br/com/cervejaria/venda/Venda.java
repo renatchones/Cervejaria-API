@@ -16,6 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.cervejaria.cliente.Cliente;
+import br.com.cervejaria.estilo.Cerveja;
 
 @Entity
 @Table(name = "venda")
@@ -28,11 +29,13 @@ public class Venda implements Serializable{
 	@Column
 	private double valor;
 	
-	@Column
-	private double desconto;
+	
 	
 	@Column
 	private double frete;
+	
+	@Column
+	private double quantidade;
 	
 	@Column
 	@Temporal(TemporalType.DATE)
@@ -42,23 +45,78 @@ public class Venda implements Serializable{
 	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_cerveja")
+	private Cerveja cerveja;
+	
 public Venda() {
 		
 	}
 	
 	
 
-	public Venda(Long id, double valor, double desconto, double frete, Date data ) {
-		super();
-		this.id = id;
-		this.valor = valor;
-		this.desconto = desconto;
-		this.frete = frete;
-		this.data = data;
-		this.cliente = cliente;
-		
-	}
 	
+
+	public Venda(Long id, double valor, double frete, double quantidade, Date data) {
+	super();
+	this.id = id;
+	this.valor = valor;
+	this.frete = frete;
+	this.quantidade = quantidade;
+	this.data = data;
+}
+
+
+
+
+
+	public double getQuantidade() {
+	return quantidade;
+}
+
+
+
+
+
+public void setQuantidade(double quantidade) {
+	this.quantidade = quantidade;
+}
+
+
+
+
+
+public Date getData() {
+	return data;
+}
+
+
+
+
+
+public void setData(Date data) {
+	this.data = data;
+}
+
+
+
+
+
+public Cerveja getCerveja() {
+	return cerveja;
+}
+
+
+
+
+
+public void setCerveja(Cerveja cerveja) {
+	this.cerveja = cerveja;
+}
+
+
+
+
 
 	public Cliente getCliente() {
 		return cliente;
@@ -88,13 +146,7 @@ public Venda() {
 		this.valor = valor;
 	}
 
-	public double getDesconto() {
-		return desconto;
-	}
-
-	public void setDesconto(double desconto) {
-		this.desconto = desconto;
-	}
+	
 
 	public double getFrete() {
 		return frete;
