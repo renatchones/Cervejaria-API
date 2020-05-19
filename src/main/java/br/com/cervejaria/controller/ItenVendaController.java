@@ -13,41 +13,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.cervejaria.estilo.Estilo;
-import br.com.cervejaria.repository.VendaRepository;
+import br.com.cervejaria.repository.ItenVendaRepository;
+import br.com.cervejaria.venda.ItenVenda;
 import br.com.cervejaria.venda.Venda;
 
 @RestController
 @RequestMapping("/")
-public class VendaController {
+public class ItenVendaController {
 
 	@Autowired
-	private VendaRepository repo;
+	private ItenVendaRepository repo;
 	
-	@PostMapping("/vendas")
-	public void cadastro(@RequestBody Venda venda) {
-		repo.save(venda);
+	@PostMapping("/itenvendas")
+	public void cadastro(@RequestBody ItenVenda itenVenda) {
+		repo.save(itenVenda);
 	}
 	
-	@GetMapping("/vendas")
-	public List<Venda> getVenda(){
+	@GetMapping("/itenvendas")
+	public List<ItenVenda> getItenVenda(){
 		return repo.findAll();
 	}
 	
-	@GetMapping("/vendas/{id}")
-	public Venda listId(@PathVariable("id")Long id, @RequestBody Venda venda) {
+	@GetMapping("/itenvendas/{id}")
+	public ItenVenda listId(@PathVariable("id")Long id, @RequestBody ItenVenda ItenVenda) {
 		return repo.findById(id).get();
 	}
 	
-	@PutMapping("/vendas/{id}")
-	public void update(@PathVariable("id") Long id, @RequestBody Venda venda) {
-		Optional<Venda> Venda = repo.findById(id);
-		venda.setId(id);
-		repo.save(venda);
+	@PutMapping("/itenvendas/{id}")
+	public void update(@PathVariable("id") Long id, @RequestBody ItenVenda itenVenda) {
+		Optional<ItenVenda> ItenVenda = repo.findById(id);
+		itenVenda.setId(id);
+		repo.save(itenVenda);
 	}
 	
-	@DeleteMapping("/vendas/{id}")
-	public void delete(@PathVariable("id")Long id, @RequestBody Venda venda) {
+	@DeleteMapping("/itenvendas/{id}")
+	public void delete(@PathVariable("id")Long id, @RequestBody ItenVenda itenVenda) {
 		repo.deleteById(id);
 		
 	}
