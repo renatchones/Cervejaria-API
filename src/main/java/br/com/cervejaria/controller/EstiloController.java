@@ -25,11 +25,6 @@ public class EstiloController {
 		repo.save(estilo);
 	}
 	
-	@GetMapping("/estilos")
-	public List<Estilo> getEstilo(){
-		return repo.findAll();
-		
-	}
 	
 	
 	
